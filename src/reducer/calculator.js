@@ -1,4 +1,9 @@
-import { PRESS_BUTTON, PRESS_EQUALS } from "../actions/index";
+import {
+  CLEAR_HISTORY,
+  PRESS_BUTTON,
+  PRESS_EQUALS,
+  PRESS_RESET,
+} from "../actions/index";
 
 const INITIAL_STATE = { screen: "", history: [] };
 const calculator = (state = INITIAL_STATE, action) => {
@@ -13,6 +18,18 @@ const calculator = (state = INITIAL_STATE, action) => {
       newState.screen = eval(state.screen);
       newState.history = state.history.concat(`${state.screen}`);
       return newState;
+    case PRESS_RESET:
+      return {
+        ...state,
+        screen: "",
+      };
+    case CLEAR_HISTORY:
+      return {
+        ...state,
+        history: [],
+      };
+    default:
+      return state;
   }
 };
 
